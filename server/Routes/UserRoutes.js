@@ -1,6 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 const User = require('../Models/UserModel');
+const GenerateToken = require('../Utils/GenerateToken');
 
 const UserRoute = express.Router();
 
@@ -21,12 +22,12 @@ UserRoute.post('/login', asyncHandler(
                 name: user.name,
                 email : user.email,
                 isAdmin: user.isAdmin,
-                token: null,
+                token: GenerateToken(user.id),
                 createdAt: user.createdAt
             })
         } else {
             console.log("erro")
-            res.status(404);
+            res.status(401);
             throw new Error("Invalid credential");
         }
     }

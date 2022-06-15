@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const notFound = (req,res,next) => {
     const error = new Error(`Not found - ${req.originalUrl}`);
     res.status(404);
@@ -7,7 +8,7 @@ const notFound = (req,res,next) => {
 
 const errorHandler = (err, req, res, next) => {
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode
-    console.log(res.statusCode)
+    console.log(err)
     res.status(statusCode);
     res.json({
         message: err.message,

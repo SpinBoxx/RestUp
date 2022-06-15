@@ -16,10 +16,6 @@ ConnectDatabase()
 app.use('/api/products', ProductRoute)
 app.use('/api/users', UserRoute)
 
-// ERROR HANDLER
-app.use(notFound)
-app.use(errorHandler)
-
 app.get('/api/users', (req, res) => {
   // var ojb = JSON.parse(products)
   res.json(users)
@@ -31,7 +27,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-
+// ERROR HANDLER
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
